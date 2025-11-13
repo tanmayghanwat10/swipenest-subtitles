@@ -1,0 +1,7 @@
+whisper
+ffmpeg-python
+tqdm
+numpy
+#pytorch-lightning
+#pytorch
+torch
