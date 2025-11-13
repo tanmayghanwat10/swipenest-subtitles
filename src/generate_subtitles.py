@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-import whisper
+from faster_whisper import WhisperModel
 
 def _format_time_srt(t: float) -> str:
     h = int(t // 3600)
@@ -14,14 +14,14 @@ def generate_subtitles(audio_path, output_dir, model_name="tiny", language="en")
     subtitle_path = os.path.normpath(os.path.join(output_dir, f"{base_name}.srt"))
 
     print(f"📝 Generating subtitles from {audio_path} -> {subtitle_path}")
-    model = whisper.load_model(model_name)  # "tiny" or "base"
-    result = model.transcribe(audio_path, fp16=False, language=language)
+    model = WhisperModel(model_name, device="cpu", compute_type="int8")  # Use CPU and int8 for compatibility
+    segments, info = model.transcribe(audio_path, language=language)
 
     with open(subtitle_path, "w", encoding="utf-8") as f:
-        for i, seg in enumerate(result["segments"], start=1):
-            start = _format_time_srt(seg["start"])
-            end = _format_time_srt(seg["end"])
-            text = seg["text"].strip()
+        for i, segment in enumerate(segments, start=1):
+            start = _format_time_srt(segment.start)
+            end = _format_time_srt(segment.end)
+            text = segment.text.strip()
             f.write(f"{i}\n{start} --> {end}\n{text}\n\n")
 
     print(f"✅ Subtitles saved at: {subtitle_path}")

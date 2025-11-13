@@ -27,6 +27,4 @@ Automatically generate subtitles for any video using **OpenAI Whisper** and **FF
 - Exports `.srt` subtitle files
 - Works in both local and Docker environments
 
----
-
-## 🛠️ Project Structure
+- Tanmay Ghanwat
