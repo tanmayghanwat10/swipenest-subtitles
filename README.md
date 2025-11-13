@@ -1,3 +1,6 @@
+-
+>>>>>>> 40f8da66dfd3aacf5eaedd73a766a7e530cba425
+=======
 Automatically extract audio and generate subtitles from any video using OpenAI’s Whisper (via Faster-Whisper).
 
 Create virtual environment
@@ -26,5 +29,7 @@ Automatically generate subtitles for any video using **OpenAI Whisper** and **FF
 - Generates accurate subtitles using Whisper
 - Exports `.srt` subtitle files
 - Works in both local and Docker environments
-
 - Tanmay Ghanwat
+=======
+-
+>>>>>>> 40f8da66dfd3aacf5eaedd73a766a7e530cba425
