@@ -121,12 +121,12 @@ Select "youtube" when prompted.
 
 Build Image:
 ```bash
-docker build -t swipenest-subtitles .
+docker build -t swipenest .
 ```
 
 Run Container:
 ```bash
-docker run -v "%cd%/input:/app/input" -v "%cd%/output:/app/output" swipenest-subtitles
+docker run -it --rm -v "${PWD}/input:/app/input" -v "${PWD}/output:/app/output" swipenest
 ```
 
 ---
