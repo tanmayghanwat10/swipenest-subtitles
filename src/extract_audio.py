@@ -1,13 +1,30 @@
+import logging
 import os
 import subprocess
 from pathlib import Path
 
-def extract_audio(video_path, output_dir, fmt="wav"):
+logger = logging.getLogger(__name__)
+
+def extract_audio(video_path: str, output_dir: str, fmt: str = "wav") -> str:
+    """
+    Extracts audio from a video file using ffmpeg.
+
+    Args:
+        video_path (str): Path to the video file.
+        output_dir (str): Directory to save the audio file.
+        fmt (str): Audio format ('wav' or 'mp3').
+
+    Returns:
+        str: Path to the extracted audio file.
+
+    Raises:
+        RuntimeError: If ffmpeg extraction fails.
+    """
     base_name = os.path.splitext(os.path.basename(video_path))[0]
     audio_ext = "wav" if fmt.lower() == "wav" else "mp3"
     audio_path = os.path.normpath(os.path.join(output_dir, f"{base_name}.{audio_ext}"))
 
-    print(f"🎧 Extracting audio from {video_path} -> {audio_path}")
+    logger.info(f"Extracting audio from {video_path} -> {audio_path}")
 
     # Prefer WAV mono 16kHz for STT stability
     if audio_ext == "wav":
@@ -19,5 +36,5 @@ def extract_audio(video_path, output_dir, fmt="wav"):
     if proc.returncode != 0:
         raise RuntimeError(f"FFmpeg audio extraction failed:\n{proc.stderr}")
 
-    print(f"✅ Audio saved at: {audio_path}")
+    logger.info(f"Audio saved at: {audio_path}")
     return audio_path
