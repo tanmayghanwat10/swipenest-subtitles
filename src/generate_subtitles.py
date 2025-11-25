@@ -21,7 +21,7 @@ def _format_time_srt(t: float) -> str:
     ms = int((t - int(t)) * 1000)
     return f"{h:02}:{m:02}:{s:02},{ms:03}"
 
-def generate_subtitles(audio_path: str, output_dir: str, model: Any, language: str = "en", beam_size: int = 5, patience: float = 1.0) -> str:
+def generate_subtitles(audio_path: str, output_dir: str, model: any, language: str = "en", beam_size: int = 5, patience: float = 1.0) -> str:
     """
     Generates subtitles from an audio file using the provided model.
 

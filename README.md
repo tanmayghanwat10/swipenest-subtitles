@@ -56,7 +56,7 @@ Run Container:
 ```bash
 docker run -it --rm -v "${PWD}/input:/app/input" -v "${PWD}/output:/app/output" swipenest
 ```
-
+w
 ## ⚙️ Configuration
 Edit `Config.txt` to customize:
 - INPUT_DIR: Input directory path
