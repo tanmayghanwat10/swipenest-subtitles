@@ -67,7 +67,7 @@ docker build -t swipenest_subtitles .
 docker stop swipenest_subtitles_container 2>$null
 
 # Restart or create new container with fresh mounts
-docker start swipenest_subtitles_container 2>$null || docker run -it --name swipenest_subtitles_container -v ${PWD}\input:/app/input -v ${PWD}\output:/app/output swipenest_subtitles
+docker start swipenest_subtitles_container 2>$null || docker run -it --name swipenest_subtitles_container -v ${PWD}\input\Local_Videos:/app/input -v ${PWD}\output:/app/output swipenest_subtitles
 ```
 
 **Linux / macOS:**
@@ -76,7 +76,7 @@ docker start swipenest_subtitles_container 2>$null || docker run -it --name swip
 docker stop swipenest_subtitles_container 2>/dev/null
 
 # Restart or create new container with fresh mounts
-docker start swipenest_subtitles_container 2>/dev/null || docker run -it --name swipenest_subtitles_container -v $(pwd)/input:/app/input -v $(pwd)/output:/app/output swipenest_subtitles
+docker start swipenest_subtitles_container 2>/dev/null || docker run -it --name swipenest_subtitles_container -v $(pwd)/input/Local_Videos:/app/input -v $(pwd)/output:/app/output swipenest_subtitles
 ```
 
 **Note:** Docker containers are immutable. To update code changes:
@@ -88,12 +88,13 @@ docker start swipenest_subtitles_container 2>/dev/null || docker run -it --name 
 
 **Linux/macOS:**
 ```bash
-docker build -t swipenest_subtitles . && docker rm -f swipenest_subtitles_container 2>/dev/null; docker run -it --name swipenest_subtitles_container -v $(pwd)/input:/app/input -v $(pwd)/output:/app/output swipenest_subtitles
+docker build -t swipenest_subtitles . && docker rm -f swipenest_subtitles_container 2>/dev/null; 
+docker rm -f swipenest_subtitles_container && docker run -it --name swipenest_subtitles_container -v $(pwd)/input/Local_Videos:/app/input -v $(pwd)/output:/app/output swipenest_subtitles
 ```
 
 **Windows PowerShell:**
 ```powershell
-docker build -t swipenest_subtitles . ; docker rm -f swipenest_subtitles_container 2>$null ; docker run -it --name swipenest_subtitles_container -v ${PWD}\input:/app/input -v ${PWD}\output:/app/output swipenest_subtitles
+docker build -t swipenest_subtitles . ; docker rm -f swipenest_subtitles_container 2>$null ; docker rm -f swipenest_subtitles_container && docker run -it --name swipenest_subtitles_container -v $(pwd)/input/Local_Videos:/app/input -v $(pwd)/output:/app/output swipenest_subtitles
 ```
 ## ⚙️ Configuration
 Edit `Config.txt` to customize:
