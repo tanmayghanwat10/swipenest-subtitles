@@ -1,4 +1,4 @@
-# 🎬 Swipenest Subtitles Generator
+# 🎬 swipenest_subtitles Subtitles Generator
 
 Automatically generate subtitles for any video using **OpenAI Whisper** and **FFmpeg**.
 
@@ -50,13 +50,13 @@ python -m src.main_youtube
 ### Initial Build
 
 ```bash
-docker build -t swipenest .
+docker build -t swipenest_subtitles .
 ```
 
 ### Rebuild image after code changes (fast - uses cached dependencies)
 
 ```bash
-docker build -t swipenest .
+docker build -t swipenest_subtitles .
 ```
 
 ### Run Container
@@ -64,36 +64,36 @@ docker build -t swipenest .
 **Windows PowerShell:**
 ```powershell
 # Stop existing container (keeps it for reuse)
-docker stop swipenest_container 2>$null
+docker stop swipenest_subtitles_container 2>$null
 
 # Restart or create new container with fresh mounts
-docker start swipenest_container 2>$null || docker run -it --name swipenest_container -v ${PWD}\input:/app/input -v ${PWD}\output:/app/output swipenest
+docker start swipenest_subtitles_container 2>$null || docker run -it --name swipenest_subtitles_container -v ${PWD}\input:/app/input -v ${PWD}\output:/app/output swipenest_subtitles
 ```
 
 **Linux / macOS:**
 ```bash
 # Stop existing container (keeps it for reuse)
-docker stop swipenest_container 2>/dev/null
+docker stop swipenest_subtitles_container 2>/dev/null
 
 # Restart or create new container with fresh mounts
-docker start swipenest_container 2>/dev/null || docker run -it --name swipenest_container -v $(pwd)/input:/app/input -v $(pwd)/output:/app/output swipenest
+docker start swipenest_subtitles_container 2>/dev/null || docker run -it --name swipenest_subtitles_container -v $(pwd)/input:/app/input -v $(pwd)/output:/app/output swipenest_subtitles
 ```
 
 **Note:** Docker containers are immutable. To update code changes:
 1. Rebuild the image (step 2 above) - dependencies are cached, only code layer rebuilds
-2. Remove old container: `docker rm swipenest_container`
+2. Remove old container: `docker rm swipenest_subtitles_container`
 3. Run the container again with the new image
 
 ### Quick update one-liner (rebuild + restart)
 
 **Linux/macOS:**
 ```bash
-docker build -t swipenest . && docker rm -f swipenest_container 2>/dev/null; docker run -it --name swipenest_container -v $(pwd)/input:/app/input -v $(pwd)/output:/app/output swipenest
+docker build -t swipenest_subtitles . && docker rm -f swipenest_subtitles_container 2>/dev/null; docker run -it --name swipenest_subtitles_container -v $(pwd)/input:/app/input -v $(pwd)/output:/app/output swipenest_subtitles
 ```
 
 **Windows PowerShell:**
 ```powershell
-docker build -t swipenest . ; docker rm -f swipenest_container 2>$null ; docker run -it --name swipenest_container -v ${PWD}\input:/app/input -v ${PWD}\output:/app/output swipenest
+docker build -t swipenest_subtitles . ; docker rm -f swipenest_subtitles_container 2>$null ; docker run -it --name swipenest_subtitles_container -v ${PWD}\input:/app/input -v ${PWD}\output:/app/output swipenest_subtitles
 ```
 ## ⚙️ Configuration
 Edit `Config.txt` to customize:
