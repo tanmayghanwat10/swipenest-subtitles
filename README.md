@@ -67,7 +67,9 @@ docker build -t swipenest_extract_subtitles .
 docker stop swipenest_extract_subtitles_container 2>$null
 
 # Restart or create new container with fresh mounts
-docker start swipenest_extract_subtitles_container 2>$null || docker run -it --name swipenest_extract_subtitles_container -v ${PWD}\input:/app/input -v ${PWD}\output:/app/output swipenest_extract_subtitles
+docker start swipenest_extract_subtitles_container 2>$null
+
+docker run -it --name swipenest_extract_subtitles_container -v ${PWD}\input:/app/input -v ${PWD}\output:/app/output swipenest_extract_subtitles
 ```
 
 **Linux / macOS:**
