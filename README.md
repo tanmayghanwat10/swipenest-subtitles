@@ -81,19 +81,20 @@ docker start swipenest_extract_subtitles_container 2>/dev/null || docker run -it
 
 **Note:** Docker containers are immutable. To update code changes:
 1. Rebuild the image (step 2 above) - dependencies are cached, only code layer rebuilds
-2. Remove old container: `docker rm swipenest_extract_subtitles_container`
 3. Run the container again with the new image
 
 ### Quick update one-liner (rebuild + restart)
 
 **Linux/macOS:**
 ```bash
-docker build -t swipenest . && docker rm -f swipenest_extract_subtitles_container 2>/dev/null; docker run -it --name swipenest_extract_subtitles_container -v $(pwd)/input:/app/input -v $(pwd)/output:/app/output swipenest_extract_subtitles
+docker build -t swipenest .
+docker run -it --name swipenest_extract_subtitles_container -v $(pwd)/input:/app/input -v $(pwd)/output:/app/output swipenest_extract_subtitles
 ```
 
 **Windows PowerShell:**
 ```powershell
-docker build -t swipenest . ; docker rm -f swipenest_extract_subtitles_container 2>$null ; docker run -it --name swipenest_extract_subtitles_container -v ${PWD}\input:/app/input -v ${PWD}\output:/app/output swipenest_extract_subtitles
+docker build -t swipenest . ;
+docker run -it --name swipenest_extract_subtitles_container -v ${PWD}\input:/app/input -v ${PWD}\output:/app/output swipenest_extract_subtitles
 ```
 ## ⚙️ Configuration
 Edit `Config.txt` to customize:
