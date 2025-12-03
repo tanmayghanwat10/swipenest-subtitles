@@ -15,24 +15,38 @@ Automatically generate subtitles for any video using **OpenAI Whisper** and **FF
 
 ## 📖 Usage
 
-### Local Videos
-Place video files in the `input/` directory and run:
+### Docker (Recommended - No Local Setup Required)
+Place video files in the `input/` directory and run the Docker container directly:
 ```bash
-python -m src.main_local
+docker run -it --rm -v "${PWD}/input:/app/input" -v "${PWD}/output:/app/output" swipenest_subtitles
 ```
 
-### YouTube Videos
-Create `.url` files in the `input/` directory with YouTube URLs (one per file) and run:
-```bash
-python -m src.main_youtube
-```
+For YouTube videos, create `.url` files in the `input/` directory with YouTube URLs (one per file) and use the same Docker command.
+
+### Local Videos (Optional - Requires Local Environment)
+If you prefer running locally without Docker:
+
+1. Place video files in the `input/` directory and run:
+   ```bash
+   python -m src.main_local
+   ```
+
+2. For YouTube videos, create `.url` files in the `input/` directory with YouTube URLs (one per file) and run:
+   ```bash
+   python -m src.main_youtube
+   ```
 
 ## 📋 Requirements
-- Python 3.8+
-- FFmpeg
-- yt-dlp (for YouTube support)
+- Docker (for containerized usage)
+- Or Python 3.8+, FFmpeg, yt-dlp (for local usage)
 
 ## 🛠️ Installation
+
+### Docker Installation (Recommended)
+No local installation required. Simply build and run the Docker image as described in the Docker Usage section.
+
+### Local Installation (Optional)
+If running without Docker:
 
 1. Create virtual environment:
    ```bash
@@ -64,7 +78,11 @@ docker build -t swipenest_subtitles .
 **Windows PowerShell:**
 
 # Running Docker image>>>>>>....(TRY THIS)
+**Windows PowerShell:**
+```bash
 docker run -it --rm `  -v "${PWD}\input:/app/input" `  -v "${PWD}\output:/app/output" `  swipenest_subtitles
+```
+
 
 **Linux / macOS:**
 ```bash
