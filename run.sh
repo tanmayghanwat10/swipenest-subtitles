@@ -16,7 +16,7 @@ if [ ! -d "$INPUT_DIR" ] || [ -z "$(ls -A $INPUT_DIR)" ]; then
   exit 1
 fi
 
-# Run the Python script with progress bars
+# Run main.py with progress logs
 python main.py --input_dir "$INPUT_DIR" --output_dir "$OUTPUT_DIR"
 
 echo "🚀 SwipeNest finished at $(date '+%Y-%m-%d %H:%M:%S')"

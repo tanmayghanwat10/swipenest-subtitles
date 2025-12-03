@@ -1,29 +1,29 @@
 from faster_whisper import WhisperModel
+from tqdm import tqdm
 import os
+import soundfile as sf
 
 def generate_subtitles(audio_path, output_dir):
-    print("📥 Loading Faster-Whisper model (medium, multi-lingual)...")
+    output_file = os.path.join(output_dir, "subtitles.srt")
+    model = WhisperModel("medium", device="cpu")  # Change device="cuda" for GPU
 
-    model = WhisperModel(
-        "medium",
-        device="cpu",
-        compute_type="int8",
-        download_root="models"
-    )
+    duration = sf.SoundFile(audio_path).frames / sf.SoundFile(audio_path).samplerate
+    segments, _ = model.transcribe(audio_path, beam_size=5, language="en", word_timestamps=True)
 
-    segments, _ = model.transcribe(
-        audio_path,
-        beam_size=5,
-        vad_filter=True,
-        language=None  # auto-detect
-    )
+    pbar = tqdm(total=duration, unit="s", desc="Subtitle Generation", dynamic_ncols=True)
+    with open(output_file, "w", encoding="utf-8") as f:
+        for segment in segments:
+            f.write(f"{segment.index}\n{format_timestamp(segment.start)} --> {format_timestamp(segment.end)}\n{segment.text}\n\n")
+            pbar.n = segment.end
+            pbar.refresh()
+    pbar.n = duration
+    pbar.refresh()
+    pbar.close()
+    return output_file
 
-    srt_path = os.path.join(output_dir, "subtitles.srt")
-
-    with open(srt_path, "w", encoding="utf-8") as f:
-        for i, seg in enumerate(segments, start=1):
-            f.write(f"{i}\n")
-            f.write(f"{seg.start:.2f} --> {seg.end:.2f}\n")
-            f.write(f"{seg.text.strip()}\n\n")
-
-    return srt_path
+def format_timestamp(seconds):
+    h = int(seconds // 3600)
+    m = int((seconds % 3600) // 60)
+    s = int(seconds % 60)
+    ms = int((seconds - int(seconds)) * 1000)
+    return f"{h:02}:{m:02}:{s:02},{ms:03}"

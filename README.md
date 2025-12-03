@@ -55,6 +55,7 @@ docker build -t swipenest_subtitles .
 # Running Docker image>>>>>>....(TRY THIS)
 
 **Windows PowerShell:**
+
 ```bash
 docker run -it --rm `  -v "${PWD}\input:/app/input" `  -v "${PWD}\output:/app/output" `  swipenest_subtitles
 ```
