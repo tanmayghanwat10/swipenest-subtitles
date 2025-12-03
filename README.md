@@ -62,13 +62,9 @@ docker build -t swipenest_subtitles .
 ### Run Container
 
 **Windows PowerShell:**
-```powershell
-# Stop existing container (keeps it for reuse)
-docker stop swipenest_subtitles_container 2>$null
 
-# Restart or create new container with fresh mounts
-docker start swipenest_subtitles_container 2>$null || docker run -it --name swipenest_subtitles_container -v ${PWD}\input\Local_Videos:/app/input -v ${PWD}\output:/app/output swipenest_subtitles
-```
+# Running Docker image>>>>>>....(TRY THIS)
+docker run -it --rm `  -v "${PWD}\input:/app/input" `  -v "${PWD}\output:/app/output" `  swipenest_subtitles
 
 **Linux / macOS:**
 ```bash
