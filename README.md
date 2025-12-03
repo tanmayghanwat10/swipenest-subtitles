@@ -13,29 +13,6 @@ Automatically generate subtitles for any video using **OpenAI Whisper** and **FF
 - Works in both local and Docker environments
 - Tanmay Ghanwat
 
-## 📖 Usage
-
-### Docker (Recommended - No Local Setup Required)
-Place video files in the `input/` directory and run the Docker container directly:
-```bash
-docker run -it --rm -v "${PWD}/input:/app/input" -v "${PWD}/output:/app/output" swipenest_subtitles
-```
-
-For YouTube videos, create `.url` files in the `input/` directory with YouTube URLs (one per file) and use the same Docker command.
-
-### Local Videos (Optional - Requires Local Environment)
-If you prefer running locally without Docker:
-
-1. Place video files in the `input/` directory and run:
-   ```bash
-   python -m src.main_local
-   ```
-
-2. For YouTube videos, create `.url` files in the `input/` directory with YouTube URLs (one per file) and run:
-   ```bash
-   python -m src.main_youtube
-   ```
-
 ## 📋 Requirements
 - Docker (for containerized usage)
 - Or Python 3.8+, FFmpeg, yt-dlp (for local usage)
@@ -75,14 +52,12 @@ docker build -t swipenest_subtitles .
 
 ### Run Container
 
-**Windows PowerShell:**
-
 # Running Docker image>>>>>>....(TRY THIS)
+
 **Windows PowerShell:**
 ```bash
 docker run -it --rm `  -v "${PWD}\input:/app/input" `  -v "${PWD}\output:/app/output" `  swipenest_subtitles
 ```
-
 
 **Linux / macOS:**
 ```bash
