@@ -1,11 +1,14 @@
-import os
+import torch
+import whisper
 
-def ensure_dirs(*dirs):
-    for d in dirs:
-        os.makedirs(d, exist_ok=True)
+def load_whisper_model():
+    if torch.cuda.is_available():
+        print("GPU detected ::: using whisper-medium")
+        model = whisper.load_model("medium").to("cuda")
+        device = "cuda"
+    else:
+        print("CPU detected ::: using whisper-tiny")
+        model = whisper.load_model("tiny")
+        device = "cpu"
 
-def list_videos(directory):
-    return [
-        f for f in os.listdir(directory)
-        if f.lower().endswith((".mp4", ".mkv", ".mov", ".avi"))
-    ]
+    return model, device

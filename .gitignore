@@ -1,0 +1,6 @@
+.venv-1/
+.venv/
+output/
+__pycache__/
+*.pt
+*.wav
