@@ -34,7 +34,28 @@ If running without Docker:
 2. Install dependencies:
    ```bash
    pip install -r requirements.txt
+   ffmpeg -version
+
    ```
+
+### Run Locally 
+
+✅ Local Run
+
+Place video(s) inside the input/ folder
+
+Run:
+```bash
+python src/main.py
+```
+
+If one video exists → processing starts automatically
+
+If multiple videos exist → you are prompted to choose
+
+Generated subtitles will appear in:
+
+output/subtitles.srt
 
 ## 🐳 Docker Usage
 
@@ -44,29 +65,25 @@ If running without Docker:
 docker build -t swipenest_subtitles .
 ```
 
-### Rebuild image after code changes (fast - uses cached dependencies)
-
-```bash
-docker build -t swipenest_subtitles .
-```
-
 ### Run Container
 
-# Running Docker image>>>>>>....(TRY THIS)
+# Running Docker image
 
 **Windows PowerShell:**
 
 ```bash
-docker run -it --rm `  -v "${PWD}\input:/app/input" `  -v "${PWD}\output:/app/output" `  swipenest_subtitles
+docker run -it --rm `
+  -v "${PWD}\input:/app/input" `
+  -v "${PWD}\output:/app/output" `
+  swipenest_subtitles
 ```
 
 **Linux / macOS:**
 ```bash
-# Stop existing container (keeps it for reuse)
-docker stop swipenest_subtitles_container 2>/dev/null
-
-# Restart or create new container with fresh mounts
-docker start swipenest_subtitles_container 2>/dev/null || docker run -it --name swipenest_subtitles_container -v $(pwd)/input/Local_Videos:/app/input -v $(pwd)/output:/app/output swipenest_subtitles
+docker run -it --rm \
+  -v $(pwd)/input:/app/input \
+  -v $(pwd)/output:/app/output \
+  swipenest_subtitles
 ```
 
 **Note:** Docker containers are immutable. To update code changes:
@@ -74,22 +91,7 @@ docker start swipenest_subtitles_container 2>/dev/null || docker run -it --name 
 2. Remove old container: `docker rm swipenest_subtitles_container`
 3. Run the container again with the new image
 
-### Quick update one-liner (rebuild + restart)
-
-**Linux/macOS:**
-```bash
-docker build -t swipenest_subtitles . && docker rm -f swipenest_subtitles_container 2>/dev/null; 
-docker rm -f swipenest_subtitles_container && docker run -it --name swipenest_subtitles_container -v $(pwd)/input/Local_Videos:/app/input -v $(pwd)/output:/app/output swipenest_subtitles
-```
-
-**Windows PowerShell:**
-```powershell
-docker build -t swipenest_subtitles . ; docker rm -f swipenest_subtitles_container 2>$null ; docker rm -f swipenest_subtitles_container && docker run -it --name swipenest_subtitles_container -v $(pwd)/input/Local_Videos:/app/input -v $(pwd)/output:/app/output swipenest_subtitles
-```
 ## ⚙️ Configuration
-Edit `Config.txt` to customize:
-- INPUT_DIR: Input directory path
-- OUTPUT_DIR: Output directory path
 - AUDIO_FORMAT: Audio format (wav/mp3)
 - MODEL: Whisper model (tiny/base/small/medium/large)
 - LANGUAGE: Language code (en, es, fr, etc.) or 'auto' for automatic detection
